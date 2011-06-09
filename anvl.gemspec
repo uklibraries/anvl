@@ -3,6 +3,8 @@
 Gem::Specification.new do |s|
   s.name = %q{anvl}
   s.version = "0.3.0"
+  s.description = "Ruby ANVL implementation"
+  s.summary = "Ruby ANVL implementation"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chris Beer"]
