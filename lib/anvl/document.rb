@@ -1,21 +1,25 @@
 module ANVL
   class Document # < Hash
+    # Parse an ANVL formatted string into an ANVL::Document
+    # @param String
     def self.parse str
       anvl = self.new  str
       anvl
     end
 
+    # ANVL key/value pairs
     attr_reader :entries
 
-    def initialize obj = nil
+    # @param [String, Hash] obj optional ANVL formatted string or hash values 
+    def initialize anvl_string_or_hash = nil
       @entries = Array.new
 
-      case obj
+      case anvl_string_or_Hash
         when Hash
-          self.push obj
+          self.push anvl_string_or_hash
 
 	when String
-	  lines = obj.gsub(/\s?\n\s+/, ' ').split("\n")
+	  lines = anvl_string_or_hash.gsub(/\s?\n\s+/, ' ').split("\n")
 
 	  lines.each_with_index do |str, i|
 	    case str
@@ -28,13 +32,14 @@ module ANVL
 	    end  
 	  end  
 
-      end if obj
+      end if anvl_string_or_hash
 
       add_entries_methods
 
       gc!
     end
 
+    # @return [String] an ANVL-formatted string
     def to_s
       gc!
       @entries.map do |obj|
@@ -42,6 +47,7 @@ module ANVL
       end.join "\n"
     end
 
+    # @return [Hash] an ordinary hash representation of the ANVL document
     def to_h
       gc!
       h = {}
@@ -58,6 +64,11 @@ module ANVL
       h
     end
 
+    # Retrieve an ANVL entry
+    # @param [String] display_label
+    # @param [Hash] args
+    # @option args [Boolean] :raw 
+    # @return [Array, String]
     def [] display_label, args = {}
       v = @entries.select { |x| x =~ display_label }
       v &&= v.map { |x| x.to_s } unless args[:raw]
@@ -66,6 +77,10 @@ module ANVL
     end
     alias_method :fetch, :[]
 
+    # Set an ANVL key/value pair
+    # @param [String] display_label
+    # @param [String] value
+    # @param [Boolean] append (if false (the default), it will overwrite any existing tags for the label)
     def []= display_label, value, append = false
       label = convert_label display_label
       value = [value] unless value.is_a? Array
@@ -79,9 +94,10 @@ module ANVL
         end
       end
     end
-
     alias_method :store, :[]=
 
+    # Append an ANVL key/value pair to the document
+    # @param [Hash]  key => value to append
     def push hash
       hash.each do |label, value|
         self.store label, value, true
