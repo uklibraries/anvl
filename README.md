@@ -1,8 +1,8 @@
-= anvl
+# anvl
 
-Ruby implementation of A Name-Value Language (ANVL)
+This is a Ruby implementation of the [A Name-Value Language (ANVL)](https://wiki.ucop.edu/display/Curation/Anvl) microservice. ANVL (A Name-Value Language) is a simple record syntax based on email headers. An ANVL record is a sequence of data elements ending in a blank line. An element consists of a label, a colon, and an optional value, and a long value may be folded (continued) onto the next line by inserting a newline and indenting the next line.
 
-== Contributing to anvl
+## Contributing to anvl
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
@@ -12,8 +12,8 @@ Ruby implementation of A Name-Value Language (ANVL)
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
+## Copyright
 
-Copyright (c) 2010 Chris Beer. See LICENSE.txt for
+Copyright (c) 2011 Chris Beer. See LICENSE.txt for
 further details.
 
