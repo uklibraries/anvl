@@ -14,7 +14,7 @@ module ANVL
     def initialize anvl_string_or_hash = nil
       @entries = Array.new
 
-      case anvl_string_or_Hash
+      case anvl_string_or_hash
         when Hash
           self.push anvl_string_or_hash
 
